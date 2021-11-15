@@ -15,6 +15,17 @@ import lombok.NonNull;
 public abstract class OutputConvertor<T extends OutputClass> {
 
     /**
+     * The Input class.
+     */
+    @NonNull
+    InputClass inputClass;
+    /**
+     * The Output class.
+     */
+    @Getter
+    T outputClass;
+
+    /**
      * Initiate output convertor.
      *
      * @param inputClass the input class
@@ -26,24 +37,12 @@ public abstract class OutputConvertor<T extends OutputClass> {
     }
 
     /**
-     * The Input class.
-     */
-    @NonNull
-    InputClass inputClass;
-    /**
-     * The Output class.
-     */
-    @Getter
-    T outputClass;
-
-
-    /**
      * Convert output convertor.
      *
      * @return the output convertor
      */
-    public OutputConvertor<T> Convert() {
-        this.outputClass = ConvertClasses();
+    public OutputConvertor<T> convert() {
+        this.outputClass = convertClasses();
         return this;
     }
 
@@ -52,6 +51,6 @@ public abstract class OutputConvertor<T extends OutputClass> {
      *
      * @return the output class
      */
-    protected abstract T ConvertClasses();
+    protected abstract T convertClasses();
 
 }

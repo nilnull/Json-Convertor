@@ -10,7 +10,6 @@ biz/aceresources/json/controllers/writers/TextTableFileWriter.class
 biz/aceresources/json/models/input/json/PojoItems.class
 biz/aceresources/json/models/OutputClass.class
 biz/aceresources/json/models/output/OutputTableItem$OutputTableItemBuilder.class
-biz/aceresources/json/controllers/writers/TextTableFileWriter$1.class
 biz/aceresources/json/models/output/OutputTableItem.class
 biz/aceresources/json/utils/StringUtils.class
 biz/aceresources/json/models/input/json/Batters.class

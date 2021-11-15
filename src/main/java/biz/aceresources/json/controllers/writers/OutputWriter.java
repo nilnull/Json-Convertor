@@ -15,6 +15,7 @@ import java.io.*;
  */
 public abstract class OutputWriter<T extends OutputClass> {
 
+
     /**
      * The Param.
      */
@@ -38,20 +39,20 @@ public abstract class OutputWriter<T extends OutputClass> {
      */
     public abstract void write(T data);
 
-    protected void writeFile(String data){
+    protected void writeFile(String data) {
         try (FileOutputStream fos = new FileOutputStream((File) param, ApplicationConfiguration.getInstance().isAppend())) {// initiate file
             try (OutputStreamWriter bufferedWriter = new OutputStreamWriter(fos)) {
-                    bufferedWriter.write(data);
-                }
-            } catch (FileNotFoundException exception) {
+                bufferedWriter.write(data);
+            }
+        } catch (FileNotFoundException exception) {
             exception.printStackTrace();
         } catch (IOException e) {
             throw new AceApplicationException(e);
         }
     }
+
     protected void print(String table) {
-        if (ApplicationConfiguration.getInstance().isPrintOutput()) {
-            System.out.print(System.lineSeparator() + table + System.lineSeparator());
-        }
+        ApplicationConfiguration.getInstance().showDebug(System.lineSeparator() + table + System.lineSeparator());
     }
+
 }

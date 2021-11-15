@@ -4,6 +4,13 @@ package biz.aceresources.json.utils;
  * The type String utils.
  */
 public class StringUtils {
+
+    /**
+     * Added a private constructor to avoid implicit public initiation
+     */
+    private StringUtils(){
+
+    }
     /**
      * Gets value.
      *
@@ -18,7 +25,8 @@ public class StringUtils {
         }
 
     }
-    public static String capitalizeFirstLetter(String name){
-        return name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
+
+    public static String capitalizeFirstLetter(String name) {
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
 }

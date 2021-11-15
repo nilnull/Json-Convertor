@@ -160,13 +160,13 @@ Usage: <main class> [-AhpsV] [-i=INPUT_FORMAT] [-o=OUTPUT_FORMAT] <inputFile>
 ```
 
 ## Developer Guideline
-<TBD>
+Do not forget to run ```mvn clean install``` before testing using terminal
 
 ### ADD NEW INPUT FORMATS
-<TBD>
+//TBD
 
 ### ADD NEW OUTPUT FORMAT
-<TBD>
+//TBD
 
 ### ARCHITECTURE
-<TBD>
+//TBD

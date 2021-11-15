@@ -37,7 +37,7 @@ class FactoryBuilderTest {
         reader.initiate(INPUT_PARAMS);
         InputClass inputClass = reader.read();
         assertNotNull(inputClass);
-        OutputClass outputClass = builder.getConvertor().initiate(inputClass).Convert().getOutputClass();
+        OutputClass outputClass = builder.getConvertor().initiate(inputClass).convert().getOutputClass();
         assertNotNull(outputClass);
         builder.getWriter().initiate(OUTPUT_PARAMS).write(outputClass);
         assertFalse(!OUTPUT_PARAMS.exists());

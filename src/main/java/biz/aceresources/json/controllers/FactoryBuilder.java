@@ -37,7 +37,7 @@ public class FactoryBuilder {
         ApplicationConfiguration.getInstance().showDebug("The factory is starting its work");
         InputClass inputClass = builder.getReader().initiate(inputParams).read();
         ApplicationConfiguration.getInstance().showDebug(String.format("Reading %s as %s", inputParams, inputFileType.name()));
-        OutputClass outputClass = builder.getConvertor().initiate(inputClass).Convert().getOutputClass();
+        OutputClass outputClass = builder.getConvertor().initiate(inputClass).convert().getOutputClass();
         ApplicationConfiguration.getInstance().showDebug(String.format("Converting to desirable output (%s)", outputClass.getClass().toString()));
         ApplicationConfiguration.getInstance().showDebug("Writing file to  (" + outputParams + ")");
         builder.getWriter().initiate(outputParams).write(outputClass);

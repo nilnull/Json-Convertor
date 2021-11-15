@@ -4,19 +4,28 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * To generate CSV files
+ */
 public class CSVUtil {
-    private static final Logger LOGGER = Logger.getLogger(CSVUtil.class .getName());
-    private final static char DEFAULT_SEPARATOR = ' ';
+    private static final Logger LOGGER = Logger.getLogger(CSVUtil.class.getName());
+
+    /**
+     * To hide implicit public one
+     */
+    private CSVUtil(){
+
+    }
 
     public static String toCSV(List<?> objectList, char separator, boolean displayHeader) {
 
-        StringBuilder result =new StringBuilder();
-        if (objectList.size() == 0) {
+        StringBuilder result = new StringBuilder();
+        if (objectList.isEmpty()) {
             return result.toString();
         }
 
-        if(displayHeader){
-            result.append(getHeaders(objectList.get(0),separator));
+        if (displayHeader) {
+            result.append(getHeaders(objectList.get(0), separator));
             result.append("\n");
         }
 
@@ -27,25 +36,24 @@ public class CSVUtil {
         return result.toString();
     }
 
-    public static String getHeaders(Object obj,char separator) {
+    public static String getHeaders(Object obj, char separator) {
         StringBuilder resultHeader = new StringBuilder();
         boolean firstField = true;
-        Field fields[] = obj.getClass().getDeclaredFields();
+        Field[] fields = obj.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
             String value;
             try {
                 value = field.getName();
 
-                if(firstField){
+                if (firstField) {
                     resultHeader.append(value);
                     firstField = false;
-                }
-                else{
+                } else {
                     resultHeader.append(separator).append(value);
                 }
                 field.setAccessible(false);
-            } catch (IllegalArgumentException  e) {
+            } catch (IllegalArgumentException e) {
                 LOGGER.severe(e.toString());
             }
         }
@@ -56,21 +64,20 @@ public class CSVUtil {
 
     public static String addObjectRow(Object obj, char separator) {
 
-        StringBuilder csvRow =new StringBuilder();
-        Field fields[] = obj.getClass().getDeclaredFields();
+        StringBuilder csvRow = new StringBuilder();
+        Field[] fields = obj.getClass().getDeclaredFields();
         boolean firstField = true;
         for (Field field : fields) {
             field.setAccessible(true);
             Object value;
             try {
                 value = field.get(obj);
-                if(value == null)
+                if (value == null)
                     value = "";
-                if(firstField){
+                if (firstField) {
                     csvRow.append(value);
                     firstField = false;
-                }
-                else{
+                } else {
                     csvRow.append(separator).append(value);
                 }
                 field.setAccessible(false);

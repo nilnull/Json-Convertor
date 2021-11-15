@@ -23,6 +23,7 @@ public enum SupportedFilesType {
     /**
      * Doc supported files type.
      */
-    DOC}
+    DOC
+}
 
 
