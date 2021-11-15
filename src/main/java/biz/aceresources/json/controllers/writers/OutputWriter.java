@@ -1,11 +1,13 @@
 package biz.aceresources.json.controllers.writers;
 
 
+import biz.aceresources.json.App;
 import biz.aceresources.json.config.ApplicationConfiguration;
 import biz.aceresources.json.errors.AceApplicationException;
 import biz.aceresources.json.models.OutputClass;
 
 import java.io.*;
+import java.util.logging.Logger;
 
 /**
  * This is to be implemented for diffrent types of output formats
@@ -15,6 +17,7 @@ import java.io.*;
  */
 public abstract class OutputWriter<T extends OutputClass> {
 
+    private static final Logger LOGGER = Logger.getLogger(OutputWriter.class.getSimpleName());
 
     /**
      * The Param.
@@ -51,8 +54,9 @@ public abstract class OutputWriter<T extends OutputClass> {
         }
     }
 
-    protected void print(String table) {
-        ApplicationConfiguration.getInstance().showDebug(System.lineSeparator() + table + System.lineSeparator());
-    }
 
+    void showDebug(String s ) {
+        if (ApplicationConfiguration.getInstance().isDebug())
+            LOGGER.info(s);
+    }
 }

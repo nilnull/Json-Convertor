@@ -1,5 +1,6 @@
 package biz.aceresources.json.controllers;
 
+import biz.aceresources.json.App;
 import biz.aceresources.json.config.ApplicationConfiguration;
 import biz.aceresources.json.controllers.readers.InputReader;
 import biz.aceresources.json.models.InputClass;
@@ -16,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class FactoryBuilderTest {
 
-    public static final File INPUT_PARAMS = new File("Sample.json");
+    public static final String SAMPLE_JSON = "Sample.json";
+    public static final File INPUT_PARAMS = new File(SAMPLE_JSON);
     public static final File OUTPUT_PARAMS = new File("test.out");
 
     @Test
@@ -27,6 +29,12 @@ class FactoryBuilderTest {
 
     }
 
+    @Test
+    void application(){
+        String[] arg = {SAMPLE_JSON, "BMW", "-p"};
+
+        App.main(arg);
+    }
 
     @Test
     @DisplayName("Test builder")

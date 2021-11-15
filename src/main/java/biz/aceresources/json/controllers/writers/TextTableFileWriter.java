@@ -1,5 +1,6 @@
 package biz.aceresources.json.controllers.writers;
 
+import biz.aceresources.json.config.ApplicationConfiguration;
 import biz.aceresources.json.errors.AceApplicationException;
 import biz.aceresources.json.models.output.OutputTable;
 import biz.aceresources.json.utils.StringUtils;
@@ -11,12 +12,14 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 
 /**
  * To write output as a file
  */
 public class TextTableFileWriter extends OutputWriter<OutputTable> {
+    private static final Logger LOGGER = Logger.getLogger(TextTableFileWriter.class.getSimpleName());
 
 
     /**
@@ -28,11 +31,11 @@ public class TextTableFileWriter extends OutputWriter<OutputTable> {
        if  (! data.getItems().isEmpty()){
             //Get properties of first object in list
             Field[] fields = data.getItems().get(0).getClass().getDeclaredFields();
-            print("Creating header for table ");
+            showDebug("Creating header for table ");
             List columns = createHeadersList(fields);
             Optional.of(data).ifPresent(outputTable -> {
                 String table = AsciiTable.getTable(AsciiTable.BASIC_ASCII, data.getItems(), columns);
-                print(table);
+                showDebug(table);
                 writeFile(table);
             });
         }
@@ -73,6 +76,10 @@ public class TextTableFileWriter extends OutputWriter<OutputTable> {
         } catch (IllegalArgumentException e) {
             throw new AceApplicationException(e);
         }
+    }
+    void showDebug(String s ) {
+        if (ApplicationConfiguration.getInstance().isDebug())
+            LOGGER.info(s);
     }
 }
 

@@ -6,11 +6,20 @@ import biz.aceresources.json.errors.AceApplicationException;
 import biz.aceresources.json.parameters.CommandLineParameters;
 import picocli.CommandLine;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
+
 
 /**
  * Main class of application
  */
 public class App {
+
+    private static final Logger LOGGER = Logger.getLogger(App.class.getSimpleName());
 
     /**
      * The entry point of application.
@@ -18,8 +27,13 @@ public class App {
      * @param args the input arguments
      */
     public static void main(String[] args) {
+
+
         // Fetch application parameters
         CommandLineParameters appParams = parseParameters(args);
+
+        //Show ACE LOGO
+        showLogo();
         if (appParams == null || appParams.getInputFile() == null || appParams.getOutputFile() == null) return;
         try {
 
@@ -35,8 +49,13 @@ public class App {
             }
 
             System.err.print(err.getShortMessage());
-            ApplicationConfiguration.getInstance().showDebug(err.getMessage());
+            showDebug(err.getMessage());
         }
+    }
+
+     static void showDebug(String s ) {
+        if (ApplicationConfiguration.getInstance().isDebug())
+            LOGGER.info(s);
     }
 
     /**
@@ -69,4 +88,29 @@ public class App {
     }
 
 
+    /**
+     * Fun to show logo
+     */
+    private static void showLogo(){
+        if (ApplicationConfiguration.getInstance().isDebug()) {
+            BufferedReader in;
+            try {
+                in = new BufferedReader(new FileReader("logo.ans"));
+
+                String line;
+
+                line = in.readLine();
+                while (line != null) {
+                    System.out.println(line);
+                    line = in.readLine();
+                }
+                in.close();
+                TimeUnit.SECONDS.sleep(5);
+
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+                //We don't care if logo is not shown'//   e.printStackTrace();
+            }
+        }
+    }
 }
