@@ -1,5 +1,4 @@
-**"Q1 – JSON Assignment"**
-
+# 📱 Ace Test
 
 JSON is a lightweight data exchange format. It is easy to read and write by human beings; and processed by any programming languages. The syntax of JSON is described in various references, one is from https://www.json.org. 
 
@@ -13,6 +12,15 @@ to the command line.
 The program retrieves the data in the json file and forms the data in a table.
 
     An inputFileContents is shown below.
+
+
+## 🎴 Screenshots
+
+<div float="left">
+	<img src="./res/csv_file.png" width="200" />
+	<img src="./res/table_out.png" width="200" />
+	<img src="./res/help.png" width="200" />
+</div>
 
 
 ### Json Format
