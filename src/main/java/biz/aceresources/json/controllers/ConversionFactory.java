@@ -4,7 +4,7 @@ import biz.aceresources.json.controllers.readers.InputReader;
 import biz.aceresources.json.controllers.readers.JsonFileReader;
 import biz.aceresources.json.controllers.writers.CsvWriter;
 import biz.aceresources.json.controllers.writers.OutputWriter;
-import biz.aceresources.json.controllers.writers.TextTableFileWriter;
+import biz.aceresources.json.controllers.writers.TextWriter;
 import biz.aceresources.json.parameters.ConversionType;
 import biz.aceresources.json.parameters.SupportedFilesType;
 import lombok.Builder;
@@ -63,7 +63,7 @@ public class ConversionFactory {
         // Todo : Add writers for other formats
         switch (outputFileType) {
             case TXT:
-                return new TextTableFileWriter();
+                return new TextWriter();
             case CSV:
                 return new CsvWriter();
 
@@ -74,7 +74,7 @@ public class ConversionFactory {
             case DOC:
 
         }
-        return new TextTableFileWriter();
+        return new TextWriter();
 
     }
 

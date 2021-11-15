@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 /**
  * To write output as a file
  */
-public class TextTableFileWriter extends OutputWriter<OutputTable> {
-    private static final Logger LOGGER = Logger.getLogger(TextTableFileWriter.class.getSimpleName());
+public class TextWriter extends OutputWriter<OutputTable> {
+    private static final Logger LOGGER = Logger.getLogger(TextWriter.class.getSimpleName());
 
 
     /**
