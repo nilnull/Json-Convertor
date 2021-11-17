@@ -1,12 +1,14 @@
 package biz.aceresources.json.controllers;
 
-import biz.aceresources.json.controllers.readers.InputReader;
-import biz.aceresources.json.controllers.readers.JsonFileReader;
+import biz.aceresources.json.controllers.readers.JsonExampleFileReader;
+import biz.aceresources.json.controllers.readers.JsonReader;
 import biz.aceresources.json.controllers.writers.CsvWriter;
 import biz.aceresources.json.controllers.writers.OutputWriter;
+import biz.aceresources.json.controllers.writers.PdfOutputWriter;
 import biz.aceresources.json.controllers.writers.TextWriter;
 import biz.aceresources.json.parameters.ConversionType;
 import biz.aceresources.json.parameters.SupportedFilesType;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import lombok.Builder;
 
 /**
@@ -33,15 +35,15 @@ public class ConversionFactory {
      *
      * @return reader
      */
-    public InputReader getReader() {
-        return new JsonFileReader();
+    public JsonReader getReader() {
+        return new JsonExampleFileReader();
         // Todo: Add readers for other formats
         /*
         switch (type) {
             case TXT:
                 break;
             case JSON:
-                return new JsonFileReader((File) params);
+                return new JsonExampleFileReader((File) params);
             case CSV:
                 break;
             case PDF:
@@ -70,7 +72,7 @@ public class ConversionFactory {
             case JSON:
 
             case PDF:
-
+                return new PdfOutputWriter();
             case DOC:
 
         }

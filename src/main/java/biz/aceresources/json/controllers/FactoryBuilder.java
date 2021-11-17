@@ -7,6 +7,7 @@ import biz.aceresources.json.models.OutputClass;
 import biz.aceresources.json.parameters.SupportedFilesType;
 import lombok.Builder;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 /**
@@ -40,7 +41,7 @@ public class FactoryBuilder {
     public void convert() {
         ConversionFactory builder = ConversionFactory.builder().inputFileType(inputFileType).outputFileType(outputFileType).build();
         showDebug("The factory is starting its work");
-        InputClass inputClass = builder.getReader().initiate(inputParams).read();
+        InputClass inputClass = builder.getReader().initiate((File) inputParams).read();
         showDebug(String.format("Reading %s as %s", inputParams, inputFileType.name()));
         OutputClass outputClass = builder.getConvertor().initiate(inputClass).convert().getOutputClass();
         showDebug(String.format("Converting to desirable output (%s)", outputClass.getClass().toString()));

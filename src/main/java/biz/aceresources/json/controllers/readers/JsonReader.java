@@ -1,12 +1,9 @@
 package biz.aceresources.json.controllers.readers;
 
 import biz.aceresources.json.errors.AceApplicationException;
-import biz.aceresources.json.models.input.json.InputFileContents;
+import biz.aceresources.json.models.InputClass;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,11 +11,11 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 
 /**
- * To read json files from a provided file.
+ * The type Input reader that will be used inorder to read diffrent types of file (json, csv and etc).
+ *
+ * @param <T> the type parameter
  */
-@Getter
-@NoArgsConstructor
-public class JsonFileReader extends InputReader<InputFileContents> {
+public abstract class JsonReader<T extends InputClass> implements InputFileReader {
 
 
     /**
@@ -27,8 +24,18 @@ public class JsonFileReader extends InputReader<InputFileContents> {
     File param;
 
 
-    @Override
-    public InputReader initiate(Object parameter) {
+    /**
+     * Read input class.
+     *
+     * @return the input class
+     */
+
+
+
+
+
+
+    public JsonReader initiate(File parameter) {
         param = (File) parameter;
         return this;
     }
@@ -40,15 +47,13 @@ public class JsonFileReader extends InputReader<InputFileContents> {
      * @throws AceApplicationException
      */
     @Override
-    public InputFileContents read() throws AceApplicationException {
-        final Type EXAMPLE_TYPE = new TypeToken<InputFileContents>() {
+    public T read() throws AceApplicationException {
+        final Type EXAMPLE_TYPE = new TypeToken<T>() {
         }.getType();
         Gson gson = new Gson();
-        JsonReader reader = null;
         try {
-            reader = new JsonReader(new FileReader(param));
-            InputFileContents inputFileContents = gson.fromJson(reader, EXAMPLE_TYPE); // contains the whole items list
-            return inputFileContents;
+            com.google.gson.stream.JsonReader reader = new com.google.gson.stream.JsonReader(new FileReader(param));
+            return gson.fromJson(reader, EXAMPLE_TYPE);
         } catch (java.lang.IllegalStateException exception) {
             throw new AceApplicationException(exception);
         } catch (FileNotFoundException exception) {
@@ -56,3 +61,4 @@ public class JsonFileReader extends InputReader<InputFileContents> {
         }
     }
 }
+

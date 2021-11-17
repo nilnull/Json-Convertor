@@ -2,7 +2,7 @@ package biz.aceresources.json.controllers;
 
 import biz.aceresources.json.App;
 import biz.aceresources.json.config.ApplicationConfiguration;
-import biz.aceresources.json.controllers.readers.InputReader;
+import biz.aceresources.json.controllers.readers.JsonReader;
 import biz.aceresources.json.models.InputClass;
 import biz.aceresources.json.models.OutputClass;
 import biz.aceresources.json.parameters.SupportedFilesType;
@@ -19,7 +19,11 @@ class FactoryBuilderTest {
 
     public static final String SAMPLE_JSON = "Sample.json";
     public static final File INPUT_PARAMS = new File(SAMPLE_JSON);
-    public static final File OUTPUT_PARAMS = new File("test.out");
+    public static final File OUTPUT_CSV = new File("test/results/test.csv");
+    public static final String PATH_TEST_TXT = "test/results/test.txt";
+    public static final File OUTPUT_PARAMS = new File(PATH_TEST_TXT);
+    public static final File OUTPUT_PDF = new File("test/results/test.pdf");
+
 
     @Test
     void producer() {
@@ -31,7 +35,7 @@ class FactoryBuilderTest {
 
     @Test
     void application(){
-        String[] arg = {SAMPLE_JSON, "BMW", "-p"};
+        String[] arg = {SAMPLE_JSON, PATH_TEST_TXT, "-p"};
 
         App.main(arg);
     }
@@ -41,7 +45,7 @@ class FactoryBuilderTest {
     void builder() {
         ConversionFactory builder = ConversionFactory.builder().inputFileType(SupportedFilesType.JSON).outputFileType(SupportedFilesType.TXT).build();
         ApplicationConfiguration.getInstance().showDebug("The factory is starting its work");
-        InputReader reader = builder.getReader();
+        JsonReader reader = builder.getReader();
         reader.initiate(INPUT_PARAMS);
         InputClass inputClass = reader.read();
         assertNotNull(inputClass);
@@ -49,6 +53,22 @@ class FactoryBuilderTest {
         assertNotNull(outputClass);
         builder.getWriter().initiate(OUTPUT_PARAMS).write(outputClass);
         assertFalse(!OUTPUT_PARAMS.exists());
+
+    }
+
+    @Test
+    @DisplayName("Test builder")
+    void testPdf() {
+        ConversionFactory builder = ConversionFactory.builder().inputFileType(SupportedFilesType.JSON).outputFileType(SupportedFilesType.PDF).build();
+        ApplicationConfiguration.getInstance().showDebug("The factory is starting its work");
+        JsonReader reader = builder.getReader();
+        reader.initiate(INPUT_PARAMS);
+        InputClass inputClass = reader.read();
+        assertNotNull(inputClass);
+        OutputClass outputClass = builder.getConvertor().initiate(inputClass).convert().getOutputClass();
+        assertNotNull(outputClass);
+        builder.getWriter().initiate(OUTPUT_PDF).write(outputClass);
+        assertFalse(!OUTPUT_PDF.exists());
 
     }
 }
