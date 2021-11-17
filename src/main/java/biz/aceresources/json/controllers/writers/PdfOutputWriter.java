@@ -1,19 +1,26 @@
 package biz.aceresources.json.controllers.writers;
 
 import biz.aceresources.json.config.ApplicationConfiguration;
-import biz.aceresources.json.models.output.OutputTable;
+import biz.aceresources.json.models.output.DesiredObjectsHolder;
 import biz.aceresources.json.utils.PdfUtil;
 
 import java.io.File;
 import java.util.logging.Logger;
 
-public class PdfOutputWriter extends OutputWriter<OutputTable> {
+/**
+ * To create pdf from an object
+ */
+public class PdfOutputWriter extends OutputWriter<DesiredObjectsHolder> {
 
 
     private static final Logger LOGGER = Logger.getLogger(PdfOutputWriter.class.getSimpleName());
 
+    /**
+     * Write object as a pdf file
+     * @param data the value to be written
+     */
     @Override
-    public void write(OutputTable data) {
+    public void write(DesiredObjectsHolder data) {
         File file = (File) param;
         file.getParentFile().mkdirs();
         if (ApplicationConfiguration.getInstance().isDebug())

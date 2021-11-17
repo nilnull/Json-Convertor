@@ -2,7 +2,7 @@ package biz.aceresources.json.controllers.writers;
 
 import biz.aceresources.json.config.ApplicationConfiguration;
 import biz.aceresources.json.errors.AceApplicationException;
-import biz.aceresources.json.models.output.OutputTable;
+import biz.aceresources.json.models.output.DesiredObjectsHolder;
 import biz.aceresources.json.utils.StringUtils;
 import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 /**
  * To write output as a file
  */
-public class TextWriter extends OutputWriter<OutputTable> {
-    private static final Logger LOGGER = Logger.getLogger(TextWriter.class.getSimpleName());
+public class TextOutputWriter extends OutputWriter<DesiredObjectsHolder> {
+    private static final Logger LOGGER = Logger.getLogger(TextOutputWriter.class.getSimpleName());
 
 
     /**
@@ -27,7 +27,7 @@ public class TextWriter extends OutputWriter<OutputTable> {
      *
      * @param data Value to write
      */
-    public void write(OutputTable data) {
+    public void write(DesiredObjectsHolder data) {
        if  (! data.getItems().isEmpty()){
             //Get properties of first object in list
             Field[] fields = data.getItems().get(0).getClass().getDeclaredFields();

@@ -1,6 +1,5 @@
 package biz.aceresources.json.utils;
 
-import biz.aceresources.json.models.output.OutputTable;
 import com.itextpdf.io.font.constants.StandardFontFamilies;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;

@@ -2,13 +2,9 @@ package biz.aceresources.json.controllers;
 
 import biz.aceresources.json.controllers.readers.JsonExampleFileReader;
 import biz.aceresources.json.controllers.readers.JsonReader;
-import biz.aceresources.json.controllers.writers.CsvWriter;
-import biz.aceresources.json.controllers.writers.OutputWriter;
-import biz.aceresources.json.controllers.writers.PdfOutputWriter;
-import biz.aceresources.json.controllers.writers.TextWriter;
+import biz.aceresources.json.controllers.writers.*;
 import biz.aceresources.json.parameters.ConversionType;
 import biz.aceresources.json.parameters.SupportedFilesType;
-import com.itextpdf.kernel.pdf.PdfWriter;
 import lombok.Builder;
 
 /**
@@ -65,9 +61,9 @@ public class ConversionFactory {
         // Todo : Add writers for other formats
         switch (outputFileType) {
             case TXT:
-                return new TextWriter();
+                return new TextOutputWriter();
             case CSV:
-                return new CsvWriter();
+                return new CsvOutputWriter();
 
             case JSON:
 
@@ -75,8 +71,11 @@ public class ConversionFactory {
                 return new PdfOutputWriter();
             case DOC:
 
+            case HTML:
+                return new HtmlOutputWriter();
+
         }
-        return new TextWriter();
+        return new TextOutputWriter();
 
     }
 
@@ -85,7 +84,7 @@ public class ConversionFactory {
      *
      * @return a convertor
      */
-    public OutputConvertor getConvertor() {
+    public BaseConvertor getConvertor() {
         return new TableItemsMapper();
     }
 }

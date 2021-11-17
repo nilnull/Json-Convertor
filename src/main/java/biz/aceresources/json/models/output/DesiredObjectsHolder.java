@@ -15,11 +15,11 @@ import java.util.List;
 @ToString
 @Setter
 @Getter
-public class OutputTable implements OutputClass {
+public class DesiredObjectsHolder implements OutputClass {
 
     /**
      * The Items.
      */
-    List<OutputTableItem> items;
+    List<DesiredObjectItem> items;
 
 }

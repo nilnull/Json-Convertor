@@ -15,7 +15,7 @@ import java.io.Serializable;
 /**
  * This is a row of data that will be printed in table
  */
-public class OutputTableItem implements Serializable {
+public class DesiredObjectItem implements Serializable {
     /**
      * The Id.
      */

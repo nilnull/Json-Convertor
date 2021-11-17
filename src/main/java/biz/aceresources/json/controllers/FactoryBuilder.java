@@ -1,6 +1,5 @@
 package biz.aceresources.json.controllers;
 
-import biz.aceresources.json.App;
 import biz.aceresources.json.config.ApplicationConfiguration;
 import biz.aceresources.json.models.InputClass;
 import biz.aceresources.json.models.OutputClass;
